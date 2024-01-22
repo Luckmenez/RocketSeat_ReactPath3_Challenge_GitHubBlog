@@ -43,19 +43,18 @@ export const ProfileTitle = styled.div`
     line-height: 130%;
   }
 
-  & > div {
-    display: flex;
-    gap: 0.5rem;
-    color: ${(props) => props.theme["blue-300"]};
-    font-size: 12px;
-    
-    svg {
-      margin-top: 5%;
-    }
+  .space_container {
+    margin-right: 1rem;
+  }
+
+  svg {
+    align-self: center;
   }
 
   a {
-    text-decoration: none;    color: ${(props) => props.theme["blue-300"]};
+    display: flex;
+    text-decoration: none;    
+    color: ${(props) => props.theme["blue-300"]};
     font-family: Nunito;
     font-size: 12px;
     font-style: normal;

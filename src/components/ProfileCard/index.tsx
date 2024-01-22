@@ -18,8 +18,11 @@ export function ProfileCard() {
         <ProfileTitle>
           <h4>Cameron Williamson</h4>
           <div>
-            <a href="http://google.com.br">GIT HUB</a>
-            <FontAwesomeIcon icon={faUpRightFromSquare} />
+            <a href="http://google.com.br">
+              VER NO GITHUB
+              <div className="space_container" />
+              <FontAwesomeIcon icon={faUpRightFromSquare} />
+            </a>
           </div>
         </ProfileTitle>
         <ProfileDescription>

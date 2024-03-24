@@ -2,9 +2,9 @@ import { IssueCard } from "../../components/IssueCard";
 import { ProfileCard } from "../../components/ProfileCard";
 import { Filter } from "./Filter";
 import { HomeContainer, IssuesGrid } from "./styles";
-import { api } from "../../lib/axios";
+import { IssuesContext } from "../../context/issues-context";
 
-import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
 
 interface Issue {
   id: number;
@@ -12,40 +12,20 @@ interface Issue {
   title: string;
 }
 
-interface IssueData {
+export interface IssueData {
   total_count: number;
   items: Issue[];
 }
 
-async function getIssues() {
-  const { data } = await api.get<IssueData>("search/issues?q=author:Luckmenez");
-  return data;
-}
-
 export default function Home() {
-  const {
-    data: issues,
-    isLoading,
-    isError,
-  } = useQuery<IssueData>({
-    queryKey: ["issues"],
-    queryFn: getIssues,
-  });
-
-  if (isLoading) {
-    return <div>Carregando...</div>;
-  }
-
-  if (isError) {
-    return <div>Erro ao carregar issues</div>;
-  }
+  const { items: issues, total_count } = useContext(IssuesContext);
 
   return (
     <HomeContainer>
       <ProfileCard />
-      <Filter total_count={issues?.total_count || 0} />
+      <Filter total_count={total_count || 0} />
       <IssuesGrid>
-        {issues?.items?.map((issue) => (
+        {issues?.map((issue) => (
           <IssueCard key={issue.id} title={issue.title} body={issue.body} />
         ))}
       </IssuesGrid>

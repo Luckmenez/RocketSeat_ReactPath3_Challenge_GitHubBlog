@@ -4,33 +4,36 @@ import {
   ProfileDescription,
   ProfileTitle,
 } from "./styles";
-import ProfileAvatar from "../../assets/avatar.svg";
 import { ProfileCardFooter } from "./ProfileCardFooter";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { ProfileContext } from "../../context/profile-context";
 
 export function ProfileCard() {
+  const { name, avatar_url, url, bio, login, company, followers } =
+    useContext(ProfileContext);
   return (
     <ProfileCardContainer>
-      <img src={ProfileAvatar} />
+      <img src={avatar_url} />
       <ProfileDataContainer>
         <ProfileTitle>
-          <h4>Cameron Williamson</h4>
+          <h4>{name}</h4>
           <div>
-            <a href="http://google.com.br">
+            <a href={url}>
               VER NO GITHUB
               <div className="space_container" />
               <FontAwesomeIcon icon={faUpRightFromSquare} />
             </a>
           </div>
         </ProfileTitle>
-        <ProfileDescription>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </ProfileDescription>
-        <ProfileCardFooter />
+        <ProfileDescription>{bio}</ProfileDescription>
+        <ProfileCardFooter
+          login={login}
+          company={company}
+          followers={followers}
+        />
       </ProfileDataContainer>
     </ProfileCardContainer>
   );

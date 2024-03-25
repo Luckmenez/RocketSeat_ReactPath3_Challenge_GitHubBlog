@@ -1,6 +1,5 @@
 import { createContext } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { api } from "../lib/axios";
+import { useGetIssues } from "./getIssues/GetIssues";
 
 interface IssuesContextProvider {
   children: React.ReactNode;
@@ -17,36 +16,33 @@ interface IssuesContextData {
   items: Issue[];
 }
 
-type IssuesResponse = IssuesContextData;
-
 export const IssuesContext = createContext<IssuesContextData>(
   {} as IssuesContextData
 );
 
-async function getIssues() {
-  const { data } = await api.get<IssuesResponse>(
-    "search/issues?q=author:Luckmenez"
-  );
-  return data;
-}
-
 export function IssuesProvider({ children }: IssuesContextProvider) {
-  const { data, isLoading, isError } = useQuery<IssuesResponse>({
-    queryKey: ["issues"],
-    queryFn: getIssues,
-  });
+  const {
+    data: issuesData,
+    isLoading: isLoadingIssues,
+    isError: isErrorIssues,
+  } = useGetIssues();
 
-  console.log("aaaaa ", data);
-
-  if (isLoading) {
+  if (isLoadingIssues) {
     return <div>Carregando...</div>;
   }
 
-  if (isError || !data) {
+  if (isErrorIssues || !issuesData) {
     return <div>Erro ao carregar issues</div>;
   }
 
   return (
-    <IssuesContext.Provider value={data}>{children}</IssuesContext.Provider>
+    <IssuesContext.Provider
+      value={{
+        items: issuesData.items,
+        total_count: issuesData.total_count,
+      }}
+    >
+      {children}
+    </IssuesContext.Provider>
   );
 }

@@ -3,7 +3,17 @@ import { ProfileFooterContainer } from "./styles";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faBuilding, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
-export function ProfileCardFooter() {
+interface ProfileCardFooterProps {
+  login: string;
+  company: string;
+  followers: number;
+}
+
+export function ProfileCardFooter({
+  login,
+  company,
+  followers,
+}: ProfileCardFooterProps) {
   return (
     <ProfileFooterContainer>
       <div>
@@ -13,7 +23,7 @@ export function ProfileCardFooter() {
             style={{ color: "#3a536b" }}
             size="lg"
           />
-          <p>cameronwll</p>
+          <p>{login}</p>
         </div>
 
         <div className="card__foooter--snacks">
@@ -22,7 +32,7 @@ export function ProfileCardFooter() {
             style={{ color: "#3a536b" }}
             size="lg"
           />
-          <p>RocketSeat</p>
+          <p>{company}</p>
         </div>
 
         <div className="card__foooter--snacks">
@@ -31,7 +41,7 @@ export function ProfileCardFooter() {
             style={{ color: "#3a536b" }}
             size="lg"
           />
-          <p>RocketSeat</p>
+          <p>{followers}</p>
         </div>
       </div>
     </ProfileFooterContainer>

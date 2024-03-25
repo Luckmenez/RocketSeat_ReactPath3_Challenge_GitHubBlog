@@ -25,5 +25,6 @@ export const InputQuery = styled.input`
   border-radius: 6px;
   border: 1px solid var(--Base-Border, #1C2F41);
   background: var(--Base-Input, #040F1A);
+  color: #FFFFFF;
 `
 

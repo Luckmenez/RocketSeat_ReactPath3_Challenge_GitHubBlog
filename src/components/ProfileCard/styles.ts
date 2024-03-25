@@ -8,8 +8,11 @@ export const ProfileCardContainer = styled.div`
   margin-top: -3.5rem;
   display: flex;
   position: relative;
-
   background: ${(props) => props.theme["base-background"]};
+
+  img {
+    max-width: 10rem;
+  }
 
   @media (max-width: 1280px) {
     margin-top: 0;
@@ -22,7 +25,7 @@ export const ProfileCardContainer = styled.div`
     width: 97%;
 
     img {
-      max-width: 31rem;
+      max-width: 100%;
       display: flex;
     }
   }

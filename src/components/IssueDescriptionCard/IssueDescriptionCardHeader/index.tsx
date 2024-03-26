@@ -7,7 +7,13 @@ import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-export function IssueDescriptionCardHeader() {
+interface IssueDescriptionCardHeaderProps {
+  html_url: string;
+}
+
+export function IssueDescriptionCardHeader({
+  html_url,
+}: IssueDescriptionCardHeaderProps) {
   const navigate = useNavigate();
   return (
     <IssueDescriptionCardHeaderContainer>
@@ -16,7 +22,7 @@ export function IssueDescriptionCardHeader() {
           <FontAwesomeIcon icon={faChevronLeft} />
           <p>VOLTAR</p>
         </div>
-        <a href="http://google.com.br">
+        <a href={html_url}>
           GITHUB
           <div className="space_container" />
           <FontAwesomeIcon icon={faUpRightFromSquare} />

@@ -1,17 +1,22 @@
-import { useContext } from "react";
 import { IssueDescriptionCardFooter } from "./IssueDescriptionCardFooter";
 import { IssueDescriptionCardHeader } from "./IssueDescriptionCardHeader";
 import { IssueDescriptionCardContainer } from "./styles";
-import { ProfileContext } from "../../context/profile-context";
+import { Issue } from "../../context/issues-context";
 
-export function IssueDescriptionCard() {
-  const { name, created_at } = useContext(ProfileContext);
+interface IssueDescriptionCardProps {
+  issue: Issue;
+}
 
+export function IssueDescriptionCard({ issue }: IssueDescriptionCardProps) {
   return (
     <IssueDescriptionCardContainer>
-      <IssueDescriptionCardHeader />
-      <h1>Javascript Data Types and Data Structure</h1>
-      <IssueDescriptionCardFooter />
+      <IssueDescriptionCardHeader html_url={issue.html_url} />
+      <h1>{issue.title}</h1>
+      <IssueDescriptionCardFooter
+        created_at={issue.created_at}
+        name={issue.user.login}
+        comments={issue.comments}
+      />
     </IssueDescriptionCardContainer>
   );
 }

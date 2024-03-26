@@ -5,10 +5,18 @@ interface IssuesContextProvider {
   children: React.ReactNode;
 }
 
-interface Issue {
+interface User {
+  login: string;
+}
+
+export interface Issue {
   id: number;
   body: string;
   title: string;
+  comments: number;
+  created_at: Date;
+  user: User;
+  html_url: string;
 }
 
 interface IssuesContextData {

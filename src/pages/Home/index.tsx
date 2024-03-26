@@ -3,6 +3,7 @@ import { ProfileCard } from "../../components/ProfileCard";
 import { Filter } from "./Filter";
 import { HomeContainer, IssuesGrid } from "./styles";
 import { IssuesContext } from "../../context/issues-context";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 import { useContext, useState } from "react";
 
@@ -17,7 +18,12 @@ export interface IssueData {
   items: Issue[];
 }
 
+function handleNavigateToIssue(navigate: NavigateFunction, id: number) {
+  navigate("issue", { state: { id } });
+}
+
 export default function Home() {
+  const navigate = useNavigate();
   const { items: issues, total_count } = useContext(IssuesContext);
   const [issuesState, setIssuesState] = useState<IssueData>({
     total_count: total_count || 0,
@@ -46,7 +52,9 @@ export default function Home() {
       />
       <IssuesGrid>
         {issuesState.items?.map((issue) => (
-          <IssueCard key={issue.id} title={issue.title} body={issue.body} />
+          <div onClick={() => handleNavigateToIssue(navigate, issue.id)}>
+            <IssueCard key={issue.id} title={issue.title} body={issue.body} />
+          </div>
         ))}
       </IssuesGrid>
     </HomeContainer>

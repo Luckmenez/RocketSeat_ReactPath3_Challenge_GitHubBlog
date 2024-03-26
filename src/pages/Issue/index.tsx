@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { IssueDescriptionCard } from "../../components/IssueDescriptionCard";
 import { useLocation } from "react-router-dom";
 import { Issue, IssuesContext } from "../../context/issues-context";
+import { IssueContainer } from "./styles";
+import { IssueBody } from "./IssueBody";
 
 export default function Issue() {
   const { items } = useContext(IssuesContext);
@@ -14,8 +16,9 @@ export default function Issue() {
   }
 
   return (
-    <div>
+    <IssueContainer>
       <IssueDescriptionCard issue={issue} />
-    </div>
+      <IssueBody body={issue.body} />
+    </IssueContainer>
   );
 }

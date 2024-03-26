@@ -52,8 +52,11 @@ export default function Home() {
       />
       <IssuesGrid>
         {issuesState.items?.map((issue) => (
-          <div onClick={() => handleNavigateToIssue(navigate, issue.id)}>
-            <IssueCard key={issue.id} title={issue.title} body={issue.body} />
+          <div
+            onClick={() => handleNavigateToIssue(navigate, issue.id)}
+            key={issue.id}
+          >
+            <IssueCard title={issue.title} body={issue.body} />
           </div>
         ))}
       </IssuesGrid>

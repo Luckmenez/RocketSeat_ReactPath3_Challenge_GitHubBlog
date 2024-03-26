@@ -9,7 +9,6 @@ interface ProfileData {
   url: string;
   company: string;
   followers: number;
-  created_at: Date;
 }
 
 interface ProfileContextProvider {
